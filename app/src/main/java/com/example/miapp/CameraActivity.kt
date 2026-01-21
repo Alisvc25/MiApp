@@ -29,6 +29,10 @@ import com.google.accompanist.permissions.isGranted
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import android.app.Activity
+import android.content.Intent
+
+
 
 class CameraActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +68,13 @@ fun CameraScreen() {
                     .openInputStream(uri)?.use { inputStream ->
                         android.graphics.BitmapFactory.decodeStream(inputStream)
                     }
+
+                (context as Activity).apply {
+                    setResult(Activity.RESULT_OK, Intent().apply {
+                        putExtra("photo_uri", uri.toString())
+                    })
+                    finish()
+                }
             }
         }
     }

@@ -159,6 +159,21 @@ fun ComponentesBasicos(modifier: Modifier = Modifier) {
         ) {
             Text("Abrir Ubicación")
         }
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = {
+                context.startActivity(Intent(context, AccidenteActivity::class.java))
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Registrar accidente")
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+
+
     }
 }
 

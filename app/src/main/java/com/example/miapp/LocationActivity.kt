@@ -20,6 +20,9 @@ import com.example.miapp.ui.theme.MiAppTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.location.*
+import android.app.Activity
+import android.content.Intent
+
 
 class LocationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +62,14 @@ fun LocationScreen() {
                 locationResult.lastLocation?.let { location ->
                     currentLocation = location
                     isLoadingLocation = false
+
+                    (context as? Activity)?.apply {
+                        setResult(Activity.RESULT_OK, Intent().apply {
+                            putExtra("lat", location.latitude)
+                            putExtra("lon", location.longitude)
+                        })
+                        finish()
+                    }
                 }
             }
         }
